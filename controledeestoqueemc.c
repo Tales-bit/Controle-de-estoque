@@ -63,63 +63,10 @@ int main(){
             scanf("%d", &z);
 
             p=fopen("estoque.txt", "r");
-            int num;
-            if(p==NULL){
-                printf("Erro");
-             }else{
-                 while(feof(p)==0){
-                        char pro[99];
-                        fgets(pro, 99, p);
-                        strtok(pro, "\n");
-                        if(strcmp(procura, pro)==0){
-                                fscanf(p, "%d", &num);
-                                fclose(p);
-                                printf("Sucesso %d", num);
-                                break;
-                        }
-
-                 }
-                 if(z==num){
-                    printf("Deletado");
-char buffer[256];
-char lineToRemove[256];
-strcpy(lineToRemove, procura);
-
-// Open original file in read mode
-p = fopen("estoque.txt", "r");
-// Open a temporary file in write mode
-temp = fopen("temp.txt", "w");
-
-while (fgets(buffer, sizeof(buffer), p) != NULL) {
-    // Remove newline character from buffer
-    strtok(buffer, "\n");
-    // Compare and write non-matching lines
-    if (strcmp(buffer, lineToRemove) != 0) {
-        fprintf(temp, "%s\n", buffer);
-    }
-}
-fclose(p);
-fclose(temp);
-                 }
-
-                 if(z>num){
-                    printf("Estoque insuficiente");
-                 }
-                 if(z<num){
-                    num=num-z;
-                 }
-
-
-
-
-
-
                  printf("\n");
                  fclose(p);
-                 fclose(temp);
                  break;
              }
-        }
 
         if(x==3){
             printf("\n===============================\n");
