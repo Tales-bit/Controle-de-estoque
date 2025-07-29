@@ -3,7 +3,8 @@
 #include<string.h>
 
 int main(){
-    int a,b,c,w,x,y,z;
+    int a=0,b=0,c=0,w=0,x=0,y=0,z=0;
+    int contagem=0;
     char s[99];
     char caractere;
     FILE *p, *temp;
@@ -55,40 +56,6 @@ int main(){
         printf("Respota invalida. Por favor, digite 's' para sim ou 'n' para nao\n\n");
         }
         }
-        if(x==2){
-            char procura[99];
-            printf("\nDigite o nome do item: ");
-            scanf("%s", procura);
-            printf("Digite a quantidade a ser removida: ");
-            scanf("%d", &z);
-
-            p=fopen("estoque.txt", "r");
-                 printf("\n");
-                 fclose(p);
-                 break;
-             }
-
-        if(x==3){
-            printf("\n===============================\n");
-            printf("       Estoque Atual\n");
-            printf("===============================\n");
-
-             p=fopen("estoque.txt", "r");
-             if(p==NULL){
-                printf("Erro");
-             }else{
-                 while(feof(p)==0){
-                        char est[99];
-                        fgets(est, 99, p);
-                        printf("%s", est);
-
-                 }
-                 printf("\n");
-                 fclose(p);
-                 break;
-             }
-        }
-
         if(x==4){
             printf("\nObrigado por usar o Controle de Estoques! Ate a proxima.\n");
             break;
