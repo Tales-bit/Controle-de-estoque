@@ -66,7 +66,7 @@ int main(){
             }
             printf("\n");
             printf("===============================\n");
-            printf("        Estoque atual\n");
+            printf("   Estoque atual\n");
             printf("===============================\n");
             while(feof(p)==0){
                 fgets(t, 99, p);
