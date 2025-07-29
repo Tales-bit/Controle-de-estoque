@@ -68,8 +68,15 @@ int main(){
             printf("===============================\n");
             printf("   Estoque atual\n");
             printf("===============================\n");
+            fseek(p, 0, SEEK_END);
+                 if (ftell(p) == 0) {
+                 printf("O estoque esta vazio\n");
+                 break;
+                 }
+                 rewind(p);
+
             while(feof(p)==0){
-                fgets(t, 99, p); 
+                fgets(t, 99, p);
                 if(t[0]=='\0'){
                     break;
                 }
