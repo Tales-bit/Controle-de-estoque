@@ -56,6 +56,15 @@ int main(){
         printf("Respota invalida. Por favor, digite 's' para sim ou 'n' para nao\n\n");
         }
         }
+
+        if(x==3){
+            p=fopen("estoque.txt", "r");
+            if(p==NULL){
+                printf("\nO estoque esta vazio\n\n");
+
+            }
+        }
+
         if(x==4){
             printf("\nObrigado por usar o Controle de Estoques! Ate a proxima.\n");
             break;
