@@ -4,7 +4,7 @@
 
 int main(){
     int a=0,b=0,c=0,w=0,x=0,y=0,z=0;
-    int contagem=0;
+    int contagem=0, teste=0;
     char s[99];
     char t[99];
     char caractere;
@@ -61,7 +61,7 @@ int main(){
         if(x==3){
             p=fopen("estoque.txt", "r");
             if(p==NULL){
-                printf("\nO estoque esta vazio\n\n");
+                printf("\nErro ao abrir o arquivo\n\n");
 
             }
             printf("\n");
