@@ -4,7 +4,7 @@
 
 int main(){
     int a=0,b=0,c=0,w=0,x=0,y=0,z=0;
-    int contagem=0, teste=0;
+    int contagem=0, teste=0, quanti=0, numeroa=0;
     char s[99];
     char t[99];
     char caractere;
@@ -58,11 +58,41 @@ int main(){
         }
         }
 
+        if(x==2){
+            printf("\nDigite o nome do item: ");
+            scanf("%s", s);
+            printf("Digite a quantidade a ser removida: ");
+            scanf("%d", &quanti);
+            p=fopen("estoque.txt", "r");
+            if(p==NULL){
+                printf("\nErro ao abrir o arquivo\n\n");
+            }
+            while(feof(p)==0){
+                fgets(t, 99, p);
+                t[strcspn(t, "\n")] = '\0';
+                if(strcmp(s, t)==0){
+                    break;
+                }
+            }
+            fscanf(p, "%d", &numeroa);
+            fclose(p);
+            numeroa=numeroa-quanti;
+            if(numeroa>0){
+                p=fopen("estoque.txt", "r");
+                temp=fopen("temp.txt", "w");
+                while(feof(p)==0){
+                    fgets(t, 99, p);
+                    fprintf(temp, "%s", t);
+                }
+            }else{
+
+            }
+            break;
+    }
         if(x==3){
             p=fopen("estoque.txt", "r");
             if(p==NULL){
                 printf("\nErro ao abrir o arquivo\n\n");
-
             }
             printf("\n");
             printf("===============================\n");
