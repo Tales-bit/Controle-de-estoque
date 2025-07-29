@@ -6,6 +6,7 @@ int main(){
     int a=0,b=0,c=0,w=0,x=0,y=0,z=0;
     int contagem=0;
     char s[99];
+    char t[99];
     char caractere;
     FILE *p, *temp;
     for(a=0; a<256; a++){
@@ -36,8 +37,8 @@ int main(){
             scanf("%d", &y);
 
             p=fopen("estoque.txt", "a");
-            fprintf(p, "\n%s", s);
-            fprintf(p, "\n%d", y);
+            fprintf(p, "%s\n", s);
+            fprintf(p, "%d\n", y);
             fclose(p);
 
             printf("Item adicionado com sucesso!\n\n");
@@ -63,6 +64,23 @@ int main(){
                 printf("\nO estoque esta vazio\n\n");
 
             }
+            printf("\n");
+            while(feof(p)==0){
+                fgets(t, 99, p);
+                if(t[0]=='\0'){
+                    break;
+                }
+                if(contagem%2==0){
+                    printf("Nome: %s", t);
+                }else{
+                    printf("Quantidade: %s", t);
+                }
+                contagem=contagem+1;
+                t[0]='\0';
+            }
+            fclose(p);
+            printf("\n");
+            break;
         }
 
         if(x==4){
