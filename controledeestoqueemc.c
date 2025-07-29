@@ -69,7 +69,7 @@ int main(){
             printf("   Estoque atual\n");
             printf("===============================\n");
             while(feof(p)==0){
-                fgets(t, 99, p);
+                fgets(t, 99, p); 
                 if(t[0]=='\0'){
                     break;
                 }
