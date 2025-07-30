@@ -2,6 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 
+#define MAX_ITEM 100
+#define ARQUIVO "estoque.txt"
+#define TEMP "temp.txt"
+
 int main(){
     int a=0,b=0,c=0,w=0,x=0,y=0,z=0;
     int contagem=0, teste=0, quanti=0, numeroa=0;
@@ -59,36 +63,72 @@ int main(){
         }
 
         if(x==2){
-            printf("\nDigite o nome do item: ");
-            scanf("%s", s);
-            printf("Digite a quantidade a ser removida: ");
-            scanf("%d", &quanti);
-            p=fopen("estoque.txt", "r");
-            if(p==NULL){
-                printf("\nErro ao abrir o arquivo\n\n");
-            }
-            while(feof(p)==0){
-                fgets(t, 99, p);
-                t[strcspn(t, "\n")] = '\0';
-                if(strcmp(s, t)==0){
-                    break;
-                }
-            }
-            fscanf(p, "%d", &numeroa);
-            fclose(p);
-            numeroa=numeroa-quanti;
-            if(numeroa>0){
-                p=fopen("estoque.txt", "r");
-                temp=fopen("temp.txt", "w");
-                while(feof(p)==0){
-                    fgets(t, 99, p);
-                    fprintf(temp, "%s", t);
-                }
-            }else{
 
-            }
-            break;
+
+
+
+    char nomeItem[MAX_ITEM];
+    int qtdRemover;
+    int encontrado = 0;
+
+    printf("Digite o nome do item: ");
+    scanf(" %[^\n]", nomeItem);
+
+    printf("Digite a quantidade a ser removida: ");
+    scanf("%d", &qtdRemover);
+
+    FILE *arquivo = fopen(ARQUIVO, "r");
+    FILE *temp = fopen(TEMP, "w");
+
+    if (!arquivo || !temp) {
+        printf("Erro ao abrir os arquivos.\n");
+        return 1;
     }
+
+    char linhaItem[MAX_ITEM];
+    char linhaQtd[20];
+
+    while (fgets(linhaItem, sizeof(linhaItem), arquivo) && fgets(linhaQtd, sizeof(linhaQtd), arquivo)) {
+        // Remover '\n' do final da linha do item
+        linhaItem[strcspn(linhaItem, "\n")] = '\0';
+
+        int qtd = atoi(linhaQtd);
+
+        if (strcmp(linhaItem, nomeItem) == 0) {
+            encontrado = 1;
+
+            if (qtdRemover <= qtd) {
+                int novaQtd = qtd - qtdRemover;
+                if (novaQtd > 0) {
+                    fprintf(temp, "%s\n%d\n", linhaItem, novaQtd);
+                    printf("Quantidade atualizada com sucesso!\n");
+                } else {
+                    printf("Item removido do estoque.\n");
+                    // não escreve no novo arquivo, item removido
+                }
+            } else {
+                fprintf(temp, "%s\n%d\n", linhaItem, qtd); // mantém no novo arquivo
+                printf("Estoque insuficiente. Quantidade disponivel: %d\n", qtd);
+            }
+        } else {
+            // Copia o item e a quantidade como estão
+            fprintf(temp, "%s\n%d\n", linhaItem, qtd);
+        }
+    }
+
+    fclose(arquivo);
+    fclose(temp);
+
+    if (!encontrado) {
+        printf("Item nao encontrado.\n");
+        remove(TEMP);
+    } else {
+        remove(ARQUIVO);
+        rename(TEMP, ARQUIVO);
+    }
+
+    return 0;
+}
         if(x==3){
             p=fopen("estoque.txt", "r");
             if(p==NULL){
